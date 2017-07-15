@@ -13,9 +13,10 @@ class ViewController: UIViewController {
     // Memory
     var m = 0 // Целое число
     var p = 0 // Дробная часть
+    var remNumber = 0.0 // Предыдущее число
     // Markers
     var point = false // Включение точки
-    var plus = false // Включение кнопки "Плюс"
+    var opMarker = ""
     
     @IBOutlet weak var result: UILabel!
     
@@ -24,8 +25,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     m = 0
+    p = 0
     point = false
-    plus = false
     }
 
     override func didReceiveMemoryWarning() {
@@ -37,31 +38,63 @@ class ViewController: UIViewController {
     // Функции кнопок
     
     @IBAction func number(_ sender: UIButton) {
-        if point == false {
-            m = m*10 + Int(sender.currentTitle!)!
-            result.text = String(m)} else {
-            p = p*10 + Int(sender.currentTitle!)!
-            result.text = String(m) + "." + String(p)
+        if result.text == "0" {
+            if String(sender.currentTitle!)! != "0" {
+                result.text = String(sender.currentTitle!)!}
+            }
+        else {
+            result.text = result.text! + String(sender.currentTitle!)!
+            debugPrint(result.text!)
         }
-    debugPrint(m, p)
     } // Выводит на экран введенное число
-
-    @IBAction func point(_ sender: Any) {
-        if point != true {
-            point = true
-            result.text = String(m) + "."}
+    
+    @IBAction func point(_ sender: UIButton) {
+        if point == false {
+        result.text = result.text! + "."
+        point = true
+        }
+        debugPrint(result.text!)
     } // Ставит точку
 
+    func markeroff() {
+        point = false
+        opMarker = ""
+    }
+    
     @IBAction func ACbutton(_ sender: Any) {
     m = 0
     p = 0
-    point = false
+    markeroff()
     result.text = "0"
     } // Обнуляет все значения
     
-    @IBAction func plusButton(_ sender: Any) {
-
+    @IBAction func operationButton(_ sender: UIButton) {
+    remNumber = Double(result.text!)!
+    result.text = "0"
+    m = 0
+    p = 0
+    markeroff()
+    opMarker = String(sender.currentTitle!)!
+    debugPrint(remNumber, result.text!)
+    } // Входит в режим Операция
+    
+    @IBAction func resultButton(_ sender: Any) {
+        switch opMarker {
+        case "+":
+            remNumber = remNumber + Double(result.text!)!
+        case "-":
+            remNumber = remNumber - Double(result.text!)!
+        case "*":
+            remNumber = remNumber * Double(result.text!)!
+        case "/":
+            remNumber = remNumber / Double(result.text!)!
+        default: break
+        }
+    result.text = String(remNumber)
+    markeroff()
+    debugPrint(remNumber)
     }
+
     
 }
 
