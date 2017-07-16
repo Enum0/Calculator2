@@ -290,7 +290,7 @@
                     </view>
                     <connections>
                         <outlet property="Result" destination="36t-Uu-Ewc" id="m4H-da-G5x"/>
-                        <outlet property="mcrButton" destination="ZZy-MQ-5gC" id="jBG-6w-s6n"/>
+                        <outlet property="mrButton" destination="VCJ-ST-6w9" id="LqW-uy-9lc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
