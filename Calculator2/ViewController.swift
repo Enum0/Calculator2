@@ -11,21 +11,20 @@ import UIKit
 class ViewController: UIViewController {
 
     // Memory
-    var m = 0 // Целое число
-    var p = 0 // Дробная часть
     var remNumber = 0.0 // Предыдущее число
+    var memoryNumber = 0.0 // Число в памяти
     // Markers
     var point = false // Включение точки
-    var opMarker = ""
+    var opMarker = "" // Маркер операции
+    var newNumber = true // Маркер нового числа
     
     @IBOutlet weak var result: UILabel!
+    @IBOutlet weak var mcrButton: UIButton!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-    m = 0
-    p = 0
     point = false
     }
 
@@ -38,6 +37,10 @@ class ViewController: UIViewController {
     // Функции кнопок
     
     @IBAction func number(_ sender: UIButton) {
+        if newNumber == true {
+            newNumber = false
+            result.text = "0"
+        }
         if result.text == "0" {
             if String(sender.currentTitle!)! != "0" {
                 result.text = String(sender.currentTitle!)!}
@@ -59,26 +62,24 @@ class ViewController: UIViewController {
     func markeroff() {
         point = false
         opMarker = ""
-    }
+    } // Отключение маркеров
     
     @IBAction func ACbutton(_ sender: Any) {
-    m = 0
-    p = 0
-    markeroff()
-    result.text = "0"
+        markeroff()
+        remNumber = 0.0
+        result.text = "0"
     } // Обнуляет все значения
     
     @IBAction func operationButton(_ sender: UIButton) {
-    remNumber = Double(result.text!)!
-    result.text = "0"
-    m = 0
-    p = 0
-    markeroff()
-    opMarker = String(sender.currentTitle!)!
-    debugPrint(remNumber, result.text!)
+        remNumber = Double(result.text!)!
+        newNumber = true
+        markeroff()
+        opMarker = String(sender.currentTitle!)!
+        debugPrint(remNumber, result.text!)
     } // Входит в режим Операция
     
     @IBAction func resultButton(_ sender: Any) {
+        if remNumber != 0.0 {
         switch opMarker {
         case "+":
             remNumber = remNumber + Double(result.text!)!
@@ -90,11 +91,41 @@ class ViewController: UIViewController {
             remNumber = remNumber / Double(result.text!)!
         default: break
         }
-    result.text = String(remNumber)
-    markeroff()
-    debugPrint(remNumber)
-    }
+        if Double(Int(remNumber)) != remNumber {
+            result.text = String(remNumber)
+            newNumber = true
+        } else {
+            result.text = String(Int(remNumber))
+            newNumber = true
+        }
+        markeroff()
+        debugPrint(remNumber)
+        }
+    } // Подсчёт результата (кнопка Равно)
 
+    @IBAction func plusminusButton(_ sender: Any) {
+        result.text = String(Double(result.text!)! - 2 * Double(result.text!)!)
+    } // Переключает на противоположный знак
+    
+    @IBAction func mButton(_ sender: Any) {
+        if result.text != "0" {
+        memoryNumber = Double(result.text!)!
+        mcrButton.setTitle("mr", for: .normal)
+        markeroff()
+        result.text = "0"
+        }
+    }
+    
+    @IBAction func mcButton(_ sender: UIButton) {
+        if sender.currentTitle == "mr" {
+            result.text = String(memoryNumber)
+            mcrButton.setTitle("MC", for: .normal)
+        } else {
+            memoryNumber = 0
+        }
+        
+    }
+    
     
 }
 

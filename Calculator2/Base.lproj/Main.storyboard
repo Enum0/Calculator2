@@ -53,6 +53,9 @@
                                                 <state key="normal" title="MC">
                                                     <color key="titleColor" red="0.1177059766" green="0.1177059766" blue="0.1177059766" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="mcButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="neb-MF-hNd"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VCJ-ST-6w9">
                                                 <rect key="frame" x="160.5" y="0.0" width="79.5" height="93.5"/>
@@ -61,6 +64,9 @@
                                                 <state key="normal" title="M">
                                                     <color key="titleColor" red="0.1177059766" green="0.1177059766" blue="0.1177059766" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="mButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lnk-Yi-Lr6"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HbA-Fe-fa4">
                                                 <rect key="frame" x="241" y="0.0" width="79" height="93.5"/>
@@ -69,6 +75,9 @@
                                                 <state key="normal" title="+/-">
                                                     <color key="titleColor" red="0.1177059766" green="0.1177059766" blue="0.1177059766" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="plusminusButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Sqe-8t-QnX"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -281,6 +290,7 @@
                     </view>
                     <connections>
                         <outlet property="Result" destination="36t-Uu-Ewc" id="m4H-da-G5x"/>
+                        <outlet property="mcrButton" destination="ZZy-MQ-5gC" id="jBG-6w-s6n"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
